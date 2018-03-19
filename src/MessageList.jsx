@@ -5,7 +5,7 @@ import Message from './Message.jsx';
 class MessageList extends Component {
 
   render () {
-    console.log(this.props.messages)
+    console.log("Rendering MessageList")
     const Messages = this.props.messages.map((message) => {
       return (<Message messageData={message}/>)
     });

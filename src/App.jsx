@@ -47,6 +47,7 @@ class App extends Component {
     this.state = {messages};
   }
   render() {
+    console.log("Rendering App");
     return (
       <div>
         <nav className="navbar">
