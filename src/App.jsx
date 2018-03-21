@@ -64,9 +64,7 @@ class App extends Component {
 
 
   addMessage(message) {
-
-      this.ws.send(JSON.stringify(message));
-
+    this.ws.send(JSON.stringify(message));
   }
 
   changeUser(newUsername) {
@@ -98,7 +96,6 @@ class App extends Component {
   }
   render() {
     console.log("Rendering App");
-    console.log(this.state);
     return (
       <div>
         <nav className="navbar">
