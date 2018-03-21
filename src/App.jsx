@@ -30,7 +30,9 @@ class App extends Component {
     console.log("componentDidMount <App />");
 
     this.ws.onmessage = (evt) => {
-      const newMessage = JSON.parse(evt.data);
+      let newMessage = JSON.parse(evt.data);
+      // newMessage.content = newMessage.content.replace(/(\S+.jpg)/gi, `<img src="$1">`);
+
       const oldState = this.state.messages;
       this.setState({messages: [...oldState, newMessage]});
       if (newMessage.userCount) {
@@ -41,6 +43,7 @@ class App extends Component {
   }
   render() {
     console.log("Rendering App");
+    console.log(this.state.messages);
     return (
       <React.Fragment>
         <NavBar userCount={this.state.userCount}/>

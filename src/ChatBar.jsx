@@ -20,7 +20,7 @@ class ChatBar extends Component {
             const type = "postMessage";
             const newMessage = {type, username, content};
             this.props.addMessage(newMessage);
-            content = "";
+            // evt.target.value = "";
           }
         ) : (
           () =>{
