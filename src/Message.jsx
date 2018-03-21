@@ -7,10 +7,11 @@ function Message ({messageData}) {
   // Find images in input string and render them instead of text
   const reg = /(\S+.jpg)/gi;
   let images ;
-  let imagesHTML ;
   images = messageData.content.match(reg) || [];
-    console.log(imagesHTML)
-    const content = messageData.content.replace(reg, "");
+  const content = messageData.content.replace(reg, "");
+  const imageHTML = images.map((image) => {
+    return <img id={image} src={image}></img>
+  })
 
 
   //Display system notification or incoming message based on messageData.type
@@ -21,15 +22,9 @@ function Message ({messageData}) {
     ) : (
       <div className="message">
         <span className="message-username" style={color}>{messageData.username}</span>
-        <span className="message-content">{content}
-        {
-          images.map((image) => {
-            return <img id={image} src={image}></img>
-          })
-        }</span>
+        <span className="message-content">{content}{imageHTML}</span>
       </div>
     )
-    console.log(MessageDisplay);
   console.log("Rendering Message");
   return (
     <div>

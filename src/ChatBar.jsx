@@ -10,7 +10,6 @@ class ChatBar extends Component {
 
 
   onSubmit (evt) {
-      // console.log(evt.target);
       if (evt.key === "Enter") {
       const username = this.state.currentUser.name;
       const action = (evt.target.name === "input") ? (
@@ -20,11 +19,10 @@ class ChatBar extends Component {
             const type = "postMessage";
             const newMessage = {type, username, content};
             this.props.addMessage(newMessage);
-            // evt.target.value = "";
+            evt.target.value = "";
           }
         ) : (
           () =>{
-            // console.log(this.state.currentUser.name);
             const name = evt.target.value;
             this.setState({currentUser: {name}});
 
