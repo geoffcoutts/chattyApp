@@ -30,7 +30,8 @@ class ChatBar extends Component {
 
             let content = `${username} has changed their name to ${name}`;
             const type = "postNotification";
-            const newMessage = {type, content};
+            const newMessage = {type, content, username: name};
+            console.log(newMessage);
             this.props.addMessage(newMessage);
 
             this.props.changeUser(this.state.currentUser.name);
