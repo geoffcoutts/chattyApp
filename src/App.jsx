@@ -18,7 +18,7 @@ class App extends Component {
   }
 
   addMessage(message) {
-    console.log(message);
+    // console.log(message);
     this.ws.send(JSON.stringify(message));
   }
 
@@ -36,6 +36,7 @@ class App extends Component {
       if (newMessage.userCount) {
         this.setState({userCount: newMessage.userCount});
       }
+
     };
   }
   render() {
