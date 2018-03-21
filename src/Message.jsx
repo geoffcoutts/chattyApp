@@ -5,7 +5,7 @@ function Message ({messageData}) {
   const color = {color: `${messageData.color}`,};
 
   // Find images in input string and render them instead of text
-  const reg = /(\S+.jpg)/gi;
+  const reg = /(\S+.jpg)|(\S+.png)|(\S+.gif)/gi;
   let images ;
   images = messageData.content.match(reg) || [];
   const content = messageData.content.replace(reg, "");
