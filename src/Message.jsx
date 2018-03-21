@@ -2,7 +2,9 @@ import React, {Component} from 'react';
 
 function Message ({messageData}) {
     const MessageDisplay = (messageData.type === "incomingNotification") ? (
-        <div className="message system">{messageData.content}</div>
+        <div className="message">
+          <span className="system">{messageData.content}</span>
+        </div>
       ) : (
       <div className="message">
         <span className="message-username">{messageData.username}</span>

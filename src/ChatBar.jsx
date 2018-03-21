@@ -12,12 +12,12 @@ class ChatBar extends Component {
   onSubmit (evt) {
       // console.log(evt.target);
       if (evt.key === "Enter") {
+      const username = this.state.currentUser.name;
       const action = (evt.target.name === "input") ? (
           ()=>{
             evt.preventDefault();
-            const username = this.state.currentUser.name;
             let content = evt.target.value;
-            const type = "incomingMessage";
+            const type = "postMessage";
             const newMessage = {type, username, content};
             this.props.addMessage(newMessage);
             content = "";
@@ -25,9 +25,15 @@ class ChatBar extends Component {
         ) : (
           () =>{
             // console.log(this.state.currentUser.name);
-            this.props.changeUser(this.state.currentUser.name);
             const name = evt.target.value;
             this.setState({currentUser: {name}});
+
+            let content = `${username} has changed their name to ${name}`;
+            const type = "postNotification";
+            const newMessage = {type, content};
+            this.props.addMessage(newMessage);
+
+            this.props.changeUser(this.state.currentUser.name);
           }
         );
       action(evt);
