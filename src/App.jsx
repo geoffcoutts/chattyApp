@@ -8,18 +8,24 @@ class App extends Component {
     super();
     this.state = {
       messages: [],
-      currentUser: { name: 'Anonymous' },
-      userCount: 0
+      currentUser: { username: 'Anonymous', color: 'blue' },
+      userCount: 0,
     };
     this.ws = new WebSocket('ws://localhost:3001');
     this.addMessage = this.addMessage.bind(this);
-    this.changeUser = this.changeUser.bind(this);
+    this.changeUsername = this.changeUsername.bind(this);
   }
 
   componentWillMount(){
     if (this.ws) {
       console.log('Connected to server');
     }
+    this.ws.onmessage = (evt) => {
+      let userSetup = JSON.parse(evt.data);
+      // console.log(userSetup);
+
+      // this.setState({currentUser: userSetup});
+    };
   }
 
   componentDidMount() {
@@ -29,6 +35,11 @@ class App extends Component {
     this.ws.onmessage = (evt) => {
       let newMessage = JSON.parse(evt.data);
 
+      if (newMessage.type === "userSetup") {
+        this.setState({currentUser: newMessage.user});
+        // console.log(this.state);
+        return ;
+      }
       const oldState = this.state.messages;
       this.setState({messages: [...oldState, newMessage]});
       if (newMessage.userCount) {
@@ -48,17 +59,24 @@ class App extends Component {
     this.ws.send(JSON.stringify(message));
   }
 
-  changeUser(newUsername) {
-    this.setState({currentUser: {name: newUsername}});
+  changeUsername(newUserData) {
+    // console.log(newUserData);
+
+    this.setState({currentUser: {
+      id: newUserData.id,
+      name: newUserData.name,
+      color: newUserData.color
+    }});
   }
 
   render() {
     console.log("Rendering App");
+    // console.log(this.state);
     return (
       <React.Fragment>
         <NavBar userCount={this.state.userCount}/>
         <MessageList messages={this.state.messages} />
-        <ChatBar currentUser={this.state.currentUser} addMessage={this.addMessage} changeUser={this.changeUser}/>
+        <ChatBar currentUser={this.state.currentUser} addMessage={this.addMessage} changeUsername={this.changeUsername}/>
       </React.Fragment>
     );
   }

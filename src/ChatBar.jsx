@@ -1,16 +1,17 @@
 import React, {Component} from 'react';
+import ColorPicker from './ColorPicker.jsx';
 
 class ChatBar extends Component {
   constructor (props) {
     super(props);
-    this.state = {currentUser: {name :this.props.currentUser.name}};
+    // this.state = {currentUser: this.props.currentUser};
     this.onSubmit = this.onSubmit.bind(this);
     this.sendMessage = this.sendMessage.bind(this);
     this.updateUsername = this.updateUsername.bind(this);
   }
 
   sendMessage(evt) {
-    const username = this.state.currentUser.name;
+    const username = this.props.currentUser.name;
     let content = evt.target.value;
     const type = "postMessage";
     const newMessage = {type, username, content};
@@ -19,15 +20,20 @@ class ChatBar extends Component {
   }
 
   updateUsername(evt) {
-    const username = this.state.currentUser.name;
+    const username = this.props.currentUser.username;
     const name = evt.target.value;
-    this.setState({currentUser: {name}});
+    // this.setState({currentUser: {name: {name}}});
+    // console.log(this.state);
 
     let content = `${username} has changed their name to ${name}`;
     const type = "postNotification";
     const newMessage = {type, content, username: name};
     this.props.addMessage(newMessage);
-    this.props.changeUser(this.state.currentUser.name);
+    this.props.changeUsername({
+      id: this.props.currentUser.id,
+      name,
+      color: this.props.currentUser.color
+    });
   }
 
   onSubmit (evt) {
@@ -40,15 +46,17 @@ class ChatBar extends Component {
 
   render () {
     console.log("Rendering Chatbar");
+    console.log(this.props.currentUser);
 
     return (
       <footer className="chatbar">
         <input
           className="chatbar-username"
           name="user"
-          placeholder={this.state.currentUser.name}
+          placeholder={this.props.currentUser.username}
           onKeyPress={this.onSubmit}
         />
+        <div className="chatbar-colorpick" style={{backgroundColor: this.props.currentUser.color}}></div>
         <input
           className="chatbar-message"
           type="text"
