@@ -40,6 +40,10 @@ body {
   flex: 2;
 }
 
+.messages {
+
+}
+
 .message {
   display: flex;
   padding: 5px;
@@ -59,6 +63,12 @@ body {
 
 .message-content {
   flex: 8;
+
+}
+
+.message-image {
+  max-width: 60%;
+  height: auto;
 }
 
 .message-username {

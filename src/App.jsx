@@ -3,35 +3,31 @@ import MessageList from './MessageList.jsx';
 import ChatBar from './ChatBar.jsx';
 import NavBar from './NavBar.jsx';
 
-
 class App extends Component {
   constructor () {
     super();
     this.state = {
       messages: [],
-      currentUser: {name: "Anonymous"},
+      currentUser: { name: 'Anonymous' },
       userCount: 0
     };
-    this.ws = new WebSocket("ws://localhost:3001");
+    this.ws = new WebSocket('ws://localhost:3001');
     this.addMessage = this.addMessage.bind(this);
     this.changeUser = this.changeUser.bind(this);
   }
 
-  addMessage(message) {
-    // console.log(message);
-    this.ws.send(JSON.stringify(message));
-  }
-
-  changeUser(newUsername) {
-    this.setState({currentUser: {name: newUsername}});
+  componentWillMount(){
+    if (this.ws) {
+      console.log('Connected to server');
+    }
   }
 
   componentDidMount() {
-    console.log("componentDidMount <App />");
+    console.log('componentDidMount <App />');
 
+    // Receiving message from server. Will update state of message list and usercount
     this.ws.onmessage = (evt) => {
       let newMessage = JSON.parse(evt.data);
-      // newMessage.content = newMessage.content.replace(/(\S+.jpg)/gi, `<img src="$1">`);
 
       const oldState = this.state.messages;
       this.setState({messages: [...oldState, newMessage]});
@@ -41,9 +37,23 @@ class App extends Component {
 
     };
   }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.messages.length !== this.state.messages.length) {
+      document.getElementsByClassName('messages')[0].scrollIntoView(false);
+    }
+  }
+
+  addMessage(message) {
+    this.ws.send(JSON.stringify(message));
+  }
+
+  changeUser(newUsername) {
+    this.setState({currentUser: {name: newUsername}});
+  }
+
   render() {
     console.log("Rendering App");
-    console.log(this.state.messages);
     return (
       <React.Fragment>
         <NavBar userCount={this.state.userCount}/>
