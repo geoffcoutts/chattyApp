@@ -37,57 +37,51 @@ class App extends Component {
       let newMessage = JSON.parse(evt.data);
 
       if (newMessage.type === "userSetup") {
-        this.setState({currentUser: newMessage.user});
-        // console.log(this.state);
-        return ;
-      }
-      const oldState = this.state.messages;
-      this.setState({messages: [...oldState, newMessage]});
-      if (newMessage.userCount) {
-        this.setState({userCount: newMessage.userCount});
+        return this.setState({ currentUser: newMessage.user });
       }
 
+      if (newMessage.userCount) {
+        this.setState({ userCount: newMessage.userCount });
+      }
+
+      const oldMessages = this.state.messages;
+      this.setState({ messages: [...oldMessages, newMessage] });
     };
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevState.messages.length !== this.state.messages.length) {
-      document.getElementsByClassName('messages')[0].scrollIntoView(false);
-    }
+    document.getElementsByClassName('messagesEnd')[0].scrollIntoView(false);
   }
 
   addMessage(message) {
     this.ws.send(JSON.stringify(message));
   }
 
-  changeUsername(newUserData) {
-    // console.log(newUserData);
-
-    this.setState({currentUser: {
-      id: newUserData.id,
-      username: newUserData.username,
-      color: newUserData.color
-    }});
+  changeUsername(username) {
+    let newUsername = this.state.currentUser;
+    newUsername.username = username;
+    this.setState({currentUser: newUsername});
   }
 
   changeColor(color) {
     let newColor = this.state.currentUser;
     newColor.color = color.hex;
-    this.setState({currentUser: newColor});
+    this.setState({ currentUser: newColor });
   }
 
   render() {
     console.log("Rendering App");
-    // console.log(this.state);
+    console.log(this.state);
     return (
       <React.Fragment>
-        <NavBar userCount={this.state.userCount}/>
-        <MessageList messages={this.state.messages} />
+        <NavBar userCount={ this.state.userCount }/>
+        <MessageList messages={ this.state.messages } />
+        <div className="messagesEnd"/>
         <ChatBar
-          currentUser={this.state.currentUser}
-          addMessage={this.addMessage}
-          changeUsername={this.changeUsername}
-          changeColor={this.changeColor}
+          currentUser={ this.state.currentUser }
+          addMessage={ this.addMessage }
+          changeUsername={ this.changeUsername }
+          changeColor={ this.changeColor }
         />
       </React.Fragment>
     );

@@ -40,7 +40,8 @@ body {
 
 .chrome-picker {
   position: absolute;
-  top: -250px;
+  top: -233px;
+  left: 9px;
 }
 
 .chatbar-message {
@@ -51,8 +52,8 @@ body {
   flex: 2;
 }
 
-.messages {
-
+.messagesEnd {
+  margin-top: 63px;
 }
 
 .message {
