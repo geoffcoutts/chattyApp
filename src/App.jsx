@@ -8,12 +8,13 @@ class App extends Component {
     super();
     this.state = {
       messages: [],
-      currentUser: { username: 'Anonymous', color: 'blue' },
+      currentUser: { username: 'Anonymous'},
       userCount: 0,
     };
     this.ws = new WebSocket('ws://localhost:3001');
     this.addMessage = this.addMessage.bind(this);
     this.changeUsername = this.changeUsername.bind(this);
+    this.changeColor = this.changeColor.bind(this);
   }
 
   componentWillMount(){
@@ -69,6 +70,12 @@ class App extends Component {
     }});
   }
 
+  changeColor(color) {
+    let newColor = this.state.currentUser;
+    newColor.color = color.hex;
+    this.setState({currentUser: newColor});
+  }
+
   render() {
     console.log("Rendering App");
     // console.log(this.state);
@@ -76,7 +83,12 @@ class App extends Component {
       <React.Fragment>
         <NavBar userCount={this.state.userCount}/>
         <MessageList messages={this.state.messages} />
-        <ChatBar currentUser={this.state.currentUser} addMessage={this.addMessage} changeUsername={this.changeUsername}/>
+        <ChatBar
+          currentUser={this.state.currentUser}
+          addMessage={this.addMessage}
+          changeUsername={this.changeUsername}
+          changeColor={this.changeColor}
+        />
       </React.Fragment>
     );
   }

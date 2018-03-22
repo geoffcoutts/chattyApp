@@ -4,17 +4,19 @@ import ColorPicker from './ColorPicker.jsx';
 class ChatBar extends Component {
   constructor (props) {
     super(props);
-    // this.state = {currentUser: this.props.currentUser};
+    this.state = {childVisible: false};
     this.onSubmit = this.onSubmit.bind(this);
     this.sendMessage = this.sendMessage.bind(this);
     this.updateUsername = this.updateUsername.bind(this);
+    this.showColorPicker = this.showColorPicker.bind(this);
   }
 
   sendMessage(evt) {
     const type = "postMessage";
     const username = this.props.currentUser.username;
     let content = evt.target.value;
-    const newMessage = {type, username, content};
+    const color = this.props.currentUser.color;
+    const newMessage = {type, username, content, color};
     this.props.addMessage(newMessage);
     evt.target.value = "";
   }
@@ -44,19 +46,33 @@ class ChatBar extends Component {
     }
   }
 
+  showColorPicker (evt) {
+    this.setState(prevState => ({ childVisible: !prevState.childVisible }));
+  }
+
   render () {
     console.log("Rendering Chatbar");
-    console.log(this.props.currentUser);
+    console.log(this.state);
 
     return (
       <footer className="chatbar">
+        <div
+          className="chatbar-colorpick"
+          style={{backgroundColor: this.props.currentUser.color}}
+          onClick={this.showColorPicker}>
+          {this.state.childVisible
+            ? <ColorPicker
+                changeColor={this.props.changeColor}
+                setColor={this.props.currentUser.color}
+              />
+            : null}
+        </div>
         <input
           className="chatbar-username"
           name="user"
           placeholder={this.props.currentUser.username}
           onKeyPress={this.onSubmit}
         />
-        <div className="chatbar-colorpick" style={{backgroundColor: this.props.currentUser.color}}></div>
         <input
           className="chatbar-message"
           type="text"
