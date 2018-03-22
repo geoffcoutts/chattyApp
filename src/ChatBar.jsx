@@ -11,9 +11,9 @@ class ChatBar extends Component {
   }
 
   sendMessage(evt) {
-    const username = this.props.currentUser.name;
-    let content = evt.target.value;
     const type = "postMessage";
+    const username = this.props.currentUser.username;
+    let content = evt.target.value;
     const newMessage = {type, username, content};
     this.props.addMessage(newMessage);
     evt.target.value = "";
@@ -31,7 +31,7 @@ class ChatBar extends Component {
     this.props.addMessage(newMessage);
     this.props.changeUsername({
       id: this.props.currentUser.id,
-      name,
+      username: name,
       color: this.props.currentUser.color
     });
   }

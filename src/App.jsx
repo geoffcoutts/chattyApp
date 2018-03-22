@@ -64,7 +64,7 @@ class App extends Component {
 
     this.setState({currentUser: {
       id: newUserData.id,
-      name: newUserData.name,
+      username: newUserData.username,
       color: newUserData.color
     }});
   }
