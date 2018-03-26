@@ -26,7 +26,7 @@ class App extends Component {
   componentDidMount() {
     console.log('componentDidMount <App />');
 
-    // Receiving message from server. Will update state of message list and usercount. Also used for initialized data from server.
+    // Receiving message from server. Will update the state of messages and usercount. Also used for initialized data from server.
     this.ws.onmessage = (evt) => {
       let newMessage = JSON.parse(evt.data);
 
@@ -69,7 +69,6 @@ class App extends Component {
 
   render() {
     console.log("Rendering App");
-    // console.log(this.state);
     return (
       <React.Fragment>
         <NavBar userCount={ this.state.userCount }/>

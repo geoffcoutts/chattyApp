@@ -4,6 +4,7 @@ import { ChromePicker } from 'react-color';
 class ChatBar extends Component {
   constructor (props) {
     super(props);
+    // displayColorPicker is used with an onClick for showing and hiding the color picker
     this.state = { displayColorPicker: false,
                    color: this.props.currentUser.color
                   };

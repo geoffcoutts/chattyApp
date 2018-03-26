@@ -12,7 +12,6 @@ const Message = ({ messageData }) => {
   const imageHTML = images.map((image) => {
     return (<img className="message-image" id={image} src={image}></img>)
   })
-  console.log(messageData)
 
   //Display system notification or incoming message based on messageData.type
   const MessageDisplay = (messageData.type === "incomingNotification") ? (
