@@ -19,7 +19,7 @@ Users can also use .jpg, .png, and .gif images from the internet as input
 
 ![Users can also use .jpg, .png, and .gif images from the internet as input](https://github.com/geoffcoutts/chattyApp/blob/master/docs/Chatty%20Images.png)
 
-Users are given system notifications based on users, entering or leaving the channel, or changing their handle
+Users are given system notifications based on users entering or leaving the channel, or changing their handle
 
 ![Users are given system notifications based on users, entering or leaving the channel, or changing their handle](https://github.com/geoffcoutts/chattyApp/blob/master/docs/Chatty%20User%20Leaving.png)
 
