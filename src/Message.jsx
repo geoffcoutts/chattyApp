@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Message = ({messageData}) => {
+const Message = ({ messageData }) => {
   // Set colour of text based on settings in server
   const color = {color: `${messageData.color}`};
 
@@ -10,18 +10,20 @@ const Message = ({messageData}) => {
   images = messageData.content.match(reg) || [];
   const content = messageData.content.replace(reg, "");
   const imageHTML = images.map((image) => {
-    return <img className="message-image" id={image} src={image}></img>
+    return (<img className="message-image" id={image} src={image}></img>)
   })
 
   //Display system notification or incoming message based on messageData.type
   const MessageDisplay = (messageData.type === "incomingNotification") ? (
       <div className="message">
-        <span className="system">{messageData.content}</span>
+        <span className="message-system">{messageData.content}</span>
+        <span className="message-time">{messageData.time}</span>
       </div>
     ) : (
       <div className="message">
         <span className="message-username" style={color}>{messageData.username}</span>
         <span className="message-content">{content}{imageHTML}</span>
+        <span className="message-time">{messageData.time}</span>
       </div>
     )
   console.log("Rendering Message");
