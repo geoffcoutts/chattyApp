@@ -22,7 +22,7 @@ const Message = ({ messageData }) => {
     ) : (
       <div className="message">
         <span className="message-username" style={color}>{messageData.username}</span>
-        <span className="message-content">{content}{imageHTML}</span>
+        <span className="message-content">{content}<br/>{imageHTML}</span>
         <span className="message-time">{messageData.time}</span>
       </div>
     )
