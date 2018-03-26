@@ -25,7 +25,7 @@ Users are given system notifications based on users entering or leaving the chan
 
 ### Usage
 
-Chatty can be started with "npm run start" in your terminal.
+Chatty can be started with "npm run start" in your terminal from the chattyApp folder and the chatty_server folder. Requires two instances of the terminal.
 
 
 ### Dependencies
