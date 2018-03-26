@@ -17,22 +17,16 @@ class App extends Component {
     this.changeColor = this.changeColor.bind(this);
   }
 
-  componentWillMount(){
+  componentWillMount() {
     if (this.ws) {
       console.log('Connected to server');
     }
-    this.ws.onmessage = (evt) => {
-      let userSetup = JSON.parse(evt.data);
-      // console.log(userSetup);
-
-      // this.setState({currentUser: userSetup});
-    };
   }
 
   componentDidMount() {
     console.log('componentDidMount <App />');
 
-    // Receiving message from server. Will update state of message list and usercount
+    // Receiving message from server. Will update state of message list and usercount. Also used for initialized data from server.
     this.ws.onmessage = (evt) => {
       let newMessage = JSON.parse(evt.data);
 
@@ -49,20 +43,24 @@ class App extends Component {
     };
   }
 
+  // Scrolls to bottom of message list when they span the entire page
   componentDidUpdate(prevProps, prevState) {
     document.getElementsByClassName('messagesEnd')[0].scrollIntoView(false);
   }
 
+  // Send a message to web socket server
   addMessage(message) {
     this.ws.send(JSON.stringify(message));
   }
 
+  // Update state with new username
   changeUsername(username) {
     let newUsername = this.state.currentUser;
     newUsername.username = username;
     this.setState({currentUser: newUsername});
   }
 
+  // Update state with new user color
   changeColor(color) {
     let newColor = this.state.currentUser;
     newColor.color = color.hex;
@@ -71,7 +69,7 @@ class App extends Component {
 
   render() {
     console.log("Rendering App");
-    console.log(this.state);
+    // console.log(this.state);
     return (
       <React.Fragment>
         <NavBar userCount={ this.state.userCount }/>

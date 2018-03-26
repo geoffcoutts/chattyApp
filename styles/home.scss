@@ -61,9 +61,10 @@ body {
   padding: 5px;
 }
 
-.system {
+.message-system {
   font-style: italic;
   padding: 5px 20px;
+  flex: 8;
 }
 
 .message-content,
@@ -75,7 +76,8 @@ body {
 
 .message-content {
   flex: 8;
-
+  overflow-wrap: break-word;
+  margin-right: 80px;
 }
 
 .message-image {
@@ -86,6 +88,12 @@ body {
 .message-username {
   flex: 2;
   font-weight: 700;
+}
+
+.message-time {
+  position: absolute;
+  right: 0;
+  margin: 10px;
 }
 
 .navbar {

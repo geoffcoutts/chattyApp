@@ -12,16 +12,19 @@ const Message = ({ messageData }) => {
   const imageHTML = images.map((image) => {
     return (<img className="message-image" id={image} src={image}></img>)
   })
+  console.log(messageData)
 
   //Display system notification or incoming message based on messageData.type
   const MessageDisplay = (messageData.type === "incomingNotification") ? (
       <div className="message">
-        <span className="system">{messageData.content}</span>
+        <span className="message-system">{messageData.content}</span>
+        <span className="message-time">{messageData.time}</span>
       </div>
     ) : (
       <div className="message">
         <span className="message-username" style={color}>{messageData.username}</span>
         <span className="message-content">{content}{imageHTML}</span>
+        <span className="message-time">{messageData.time}</span>
       </div>
     )
   console.log("Rendering Message");

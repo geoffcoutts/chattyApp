@@ -1,5 +1,6 @@
 import React from 'react';
 
+// Displays number of users online in nav bar
 const NavBar = ({ userCount }) => {
   return (
     <nav className="navbar">

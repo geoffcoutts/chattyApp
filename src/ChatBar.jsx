@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { ChromePicker } from 'react-color';
 
-
 class ChatBar extends Component {
   constructor (props) {
     super(props);
@@ -15,6 +14,7 @@ class ChatBar extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
+  // Takes values from input fields and creates a message object to be sent to websocke server with addMessage
   sendMessage(evt) {
     const type = "postMessage";
     const username = this.props.currentUser.username;
@@ -26,6 +26,7 @@ class ChatBar extends Component {
     evt.target.value = "";
   }
 
+  // Takes values from username input field and changes the username on the client's state and on the socket server after pressing enter.
   updateUsername(evt) {
     const username = this.props.currentUser.username;
     const newUsername = evt.target.value;
@@ -37,6 +38,7 @@ class ChatBar extends Component {
     this.props.changeUsername(newUsername);
   }
 
+  // Determines whether to send a user message or update the client's username
   onSubmit (evt) {
     if (evt.key === "Enter") {
       const isMessage = evt.target.name === 'message';
@@ -45,10 +47,12 @@ class ChatBar extends Component {
     }
   }
 
+  // Toggles the color picker when clicking the swatch
   handleClick () {
     this.setState({ displayColorPicker: !this.state.displayColorPicker });
   }
 
+  // Updates the user's color in both the main state and the chat bar state
   handleChange (color) {
     this.setState({ color: color.hex });
     this.props.changeColor(color);
