@@ -7,7 +7,17 @@ Chatty is mainly built with React for rendering the client page, ws for websocke
 
 ### Pictures
 
+Interface of Chatty
 
+![Interface of Chatty](https://github.com/geoffcoutts/chattyApp/blob/master/docs/Chatty%20Basic%20Interface.png)
+
+Users can change the colour of their username
+
+![Users can change the colour of their username](https://github.com/geoffcoutts/chattyApp/blob/master/docs/Chatty%20Colour%20Changer.png)
+
+Users are given system notifications based on users, entering or leaving the channel, or changing their handle
+
+![Users are given system notifications based on users, entering or leaving the channel, or changing their handle](https://github.com/geoffcoutts/chattyApp/blob/master/docs/Chatty%20User%20Leaving.png)
 
 ### Usage
 
@@ -17,8 +27,9 @@ Chatty can be started with "npm run start" in your terminal.
 ### Dependencies
 
 * Babel
+* RandomColor
 * React
 * React-color
 * React-dom
+* Uuidv4
 * Webpack
-*
